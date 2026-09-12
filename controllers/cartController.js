@@ -20,16 +20,10 @@ const adicionarAoCarrinho = async (req, res) => {
         if (!carrinho) {
             carrinho = await Cart.create({ usuario: usuarioId, itens: [] });
         }
-        const item = carrinho.itens.find(i => i.produto.toString() === produtoId && i.tamanho === tamanho);
-        if (item) {
-            item.quantidade += quantidade;
-        } else {
-            carrinho.itens.push({ produto: produtoId, quantidade, tamanho, cor });
-        }
-        carrinho.atualizadoEm = new Date();
+        carrinho.itens.push({ produto: produtoId, quantidade, tamanho, cor });
         await carrinho.save();
         await carrinho.populate('itens.produto');
-        res.json({ success: true, message: 'Adicionado ao carrinho', carrinho });
+        res.json({ success: true, carrinho });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
@@ -39,13 +33,9 @@ const removerDoCarrinho = async (req, res) => {
     try {
         const { usuarioId, produtoId } = req.body;
         const carrinho = await Cart.findOne({ usuario: usuarioId });
-        if (!carrinho) {
-            return res.status(404).json({ success: false, message: 'Carrinho nao encontrado' });
-        }
         carrinho.itens = carrinho.itens.filter(i => i.produto.toString() !== produtoId);
         await carrinho.save();
-        await carrinho.populate('itens.produto');
-        res.json({ success: true, message: 'Removido do carrinho', carrinho });
+        res.json({ success: true, carrinho });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }

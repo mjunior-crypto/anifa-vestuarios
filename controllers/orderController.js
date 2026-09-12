@@ -6,8 +6,8 @@ const criarPedido = async (req, res) => {
         if (!itens || itens.length === 0) {
             return res.status(400).json({ success: false, message: 'Carrinho vazio' });
         }
-        const pedido = await Order.create({ usuario: usuarioId, itens, total, pagamento: { metodo, status: 'pendente' } });
-        res.status(201).json({ success: true, message: 'Pedido criado!', pedido });
+        const pedido = await Order.create({ usuario: usuarioId, itens, total, pagamento: { metodo } });
+        res.status(201).json({ success: true, pedido });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
@@ -23,16 +23,4 @@ const obterPedidos = async (req, res) => {
     }
 };
 
-const obterPedido = async (req, res) => {
-    try {
-        const pedido = await Order.findById(req.params.id).populate('itens.produto');
-        if (!pedido) {
-            return res.status(404).json({ success: false, message: 'Pedido nao encontrado' });
-        }
-        res.json({ success: true, pedido });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
-};
-
-module.exports = { criarPedido, obterPedidos, obterPedido };
+module.exports = { criarPedido, obterPedidos };
