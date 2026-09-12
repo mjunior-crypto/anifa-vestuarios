@@ -2,7 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const gerarToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+    return jwt.sign({ id }, process.env.JWT_SECRET || 'secret123', { expiresIn: '7d' });
 };
 
 const registro = async (req, res) => {
