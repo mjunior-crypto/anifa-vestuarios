@@ -1,0 +1,35 @@
+{
+  "name": "anifa-vestuarios-tests",
+  "version": "1.0.0",
+  "description": "Testes automatizados para ANIFA VESTUÁRIOS",
+  "main": "automated-tests.js",
+  "scripts": {
+    "test": "npm run test:ui && npm run test:api",
+    "test:ui": "node tests/automated-tests.js",
+    "test:api": "node tests/api-tests.js",
+    "test:all": "npm run test:ui && npm run test:api",
+    "test:watch": "nodemon tests/automated-tests.js"
+  },
+  "keywords": [
+    "anifa",
+    "vestuarios",
+    "test",
+    "automation",
+    "puppeteer",
+    "e2e"
+  ],
+  "author": "mjunior-crypto",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^21.0.0",
+    "axios": "^1.6.0",
+    "nodemon": "^3.0.0"
+  },
+  "dependencies": {
+    "assert": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
