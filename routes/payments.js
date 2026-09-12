@@ -6,7 +6,7 @@ router.post('/processar', (req, res) => {
 });
 
 router.get('/intencao', (req, res) => {
-    res.json({ success: true, clientSecret: 'sk_test_simulation_' + Date.now() });
+    res.json({ success: true, clientSecret: 'pi_test_1234567890' });
 });
 
 module.exports = router;
