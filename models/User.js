@@ -2,24 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-    nome: {
-        type: String,
-        required: [true, 'Por favor, forneça um nome'],
-        trim: true
-    },
-    email: {
-        type: String,
-        required: [true, 'Por favor, forneça um email'],
-        unique: true,
-        lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, 'Por favor, forneça um email válido']
-    },
-    senha: {
-        type: String,
-        required: [true, 'Por favor, forneça uma senha'],
-        minlength: 6,
-        select: false
-    },
+    nome: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    senha: { type: String, required: true, minlength: 6, select: false },
     telefone: String,
     endereco: {
         rua: String,
@@ -29,23 +14,10 @@ const userSchema = new mongoose.Schema({
         estado: String,
         cep: String
     },
-    avatar: {
-        type: String,
-        default: 'https://via.placeholder.com/150?text=Avatar'
-    },
-    tipo: {
-        type: String,
-        enum: ['cliente', 'admin', 'vendedor'],
-        default: 'cliente'
-    },
-    ativo: {
-        type: Boolean,
-        default: true
-    },
-    criadoEm: {
-        type: Date,
-        default: Date.now
-    }
+    avatar: { type: String, default: 'https://via.placeholder.com/150?text=Avatar' },
+    tipo: { type: String, enum: ['cliente', 'admin', 'vendedor'], default: 'cliente' },
+    ativo: { type: Boolean, default: true },
+    criadoEm: { type: Date, default: Date.now }
 });
 
 userSchema.pre('save', async function(next) {
