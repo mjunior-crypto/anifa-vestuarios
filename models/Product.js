@@ -15,7 +15,6 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Por favor, forneça um preço'],
         min: 0
     },
-    precoOriginal: Number,
     categoria: {
         type: String,
         enum: ['infantil', 'adolescente', 'adulto', 'senior'],
@@ -32,16 +31,11 @@ const productSchema = new mongoose.Schema({
     }],
     cores: [String],
     material: String,
-    marca: String,
     avaliacao: {
         type: Number,
         default: 0,
         min: 0,
         max: 5
-    },
-    numAvaliacoes: {
-        type: Number,
-        default: 0
     },
     emEstoque: {
         type: Boolean,
@@ -50,10 +44,6 @@ const productSchema = new mongoose.Schema({
     destaque: {
         type: Boolean,
         default: false
-    },
-    promocao: {
-        ativa: { type: Boolean, default: false },
-        desconto: { type: Number, default: 0 }
     },
     criadoEm: {
         type: Date,

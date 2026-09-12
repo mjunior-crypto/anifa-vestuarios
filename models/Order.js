@@ -26,11 +26,9 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    subtotal: Number,
-    frete: { type: Number, default: 0 },
     status: {
         type: String,
-        enum: ['pendente', 'confirmada', 'processando', 'enviada', 'entregue', 'cancelada'],
+        enum: ['pendente', 'confirmada', 'enviada', 'entregue', 'cancelada'],
         default: 'pendente'
     },
     pagamento: {
@@ -45,17 +43,6 @@ const orderSchema = new mongoose.Schema({
             default: 'pendente'
         },
         stripePaymentId: String
-    },
-    entrega: {
-        endereco: {
-            rua: String,
-            numero: String,
-            bairro: String,
-            cidade: String,
-            estado: String,
-            cep: String
-        },
-        rastreamento: String
     },
     criadoEm: {
         type: Date,
